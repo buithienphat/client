@@ -1,10 +1,6 @@
 export const getProducts = async () => {
   try {
-    const res = await fetch("https://du-an-ca-nhan.onrender.com/products", {
-      next: {
-        tags: ["get-products"],
-      },
-    });
+    const res = await fetch("https://du-an-ca-nhan.onrender.com/products");
     const data = await res.json();
 
     return data;
