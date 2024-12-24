@@ -1,4 +1,5 @@
 import { getProducts } from "@/service/service";
+import { cookies } from "next/headers";
 
 interface Product {
   _id: string;
@@ -14,6 +15,7 @@ interface Product {
 }
 
 export default async function Home() {
+  cookies();
   const data = await getProducts();
 
   return (
@@ -32,4 +34,4 @@ export default async function Home() {
   );
 }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
