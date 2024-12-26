@@ -35,13 +35,16 @@ export default function Home() {
     document.cookie = "testCookie=testValue; path=/; max-age=3600";
 
     (async () => {
-      const res = await fetch(
-        "https://du-an-ca-nhan.onrender.com/user/profile",
-        {
-          method: "GET",
-          credentials: "include", // Gửi cookie theo yêu cầu
-        }
-      );
+      const res = fetch("https://du-an-ca-nhan.onrender.com/user/profile", {
+        method: "GET",
+        headers: {
+          Accept: "*/*",
+          "Content-Type": "application/json",
+          Origin: "https://client-amber-tau.vercel.app",
+          // Other necessary headers
+        },
+        credentials: "include", // Ensure cookies are sent with the request
+      });
       console.log("res", res);
     })();
   }, []);
