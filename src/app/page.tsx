@@ -34,7 +34,7 @@ export default function Home() {
   useEffect(() => {
     // Thiết lập cookie trong frontend
     document.cookie =
-      "testCookie=testValue; path=/; max-age=3600; domain=client-amber-tau.vercel.app";
+      "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NmJhMmJkNDE2NzEyZDhiNWE4OWEzYiIsImlhdCI6MTczNTE4NDk1MSwiZXhwIjoxNzM1MjcxMzUxfQ.7J7DY0HxneeFgDdO-WZAKcgbNfZ2AHHQ25ftc1nY_lk; path=/; max-age=3600; domain=client-amber-tau.vercel.app";
 
     (async () => {
       const res = await fetch(
