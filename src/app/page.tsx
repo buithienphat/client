@@ -1,7 +1,8 @@
+"use client";
 import ListProduct from "@/components/list-product/ListProduct";
-import { getProducts } from "@/service/service";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
+import useSWR from "swr";
 
 interface Product {
   _id: string;
@@ -16,13 +17,39 @@ interface Product {
   updated_at: string;
 }
 
-export default async function Home() {
-  const data = await getProducts();
+// https://du-an-ca-nhan.onrender.com/products
+
+export default function Home() {
+  // const data = await getProducts();
+
+  // const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+  // const { data, error, isLoading } = useSWR<{ data: { products: Product[] } }>(
+  //   "https://du-an-ca-nhan.onrender.com/products",
+  //   fetcher
+  // );
+
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    document.cookie = "testCookie=testValue; path=/; max-age=3600";
+
+    (async () => {
+      const res = await fetch(
+        "https://du-an-ca-nhan.onrender.com/user/profile",
+        {
+          method: "GET",
+          credentials: "include", // Gửi cookie theo yêu cầu
+        }
+      );
+      console.log("res", res);
+    })();
+  }, []);
 
   return (
     <div className="">
       <Suspense fallback={<>cehck</>}>
-        <ListProduct data={data.data.products} />
+        {/* <ListProduct data={data?.data?.products || []} /> */}
       </Suspense>
 
       <Link href={"/dasboard"}>Go add products</Link>
