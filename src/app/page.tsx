@@ -32,20 +32,26 @@ export default function Home() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    document.cookie = "testCookie=testValue; path=/; max-age=3600";
+    // Thiết lập cookie trong frontend
+    document.cookie =
+      "testCookie=testValue; path=/; max-age=3600; domain=client-amber-tau.vercel.app";
 
     (async () => {
-      const res = fetch("https://du-an-ca-nhan.onrender.com/user/profile", {
-        method: "GET",
-        headers: {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-          Origin: "https://client-amber-tau.vercel.app",
-          // Other necessary headers
-        },
-        credentials: "include", // Ensure cookies are sent with the request
-      });
-      console.log("res", res);
+      const res = await fetch(
+        "https://du-an-ca-nhan.onrender.com/user/profile",
+        {
+          method: "GET",
+          headers: {
+            Accept: "*/*",
+            "Content-Type": "application/json",
+            Origin: "https://client-amber-tau.vercel.app", // Đảm bảo domain đúng
+          },
+          credentials: "include", // Đảm bảo cookie được gửi cùng yêu cầu
+        }
+      );
+
+      const data = await res.json();
+      console.log("res", data);
     })();
   }, []);
 
